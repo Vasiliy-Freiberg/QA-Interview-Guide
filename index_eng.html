@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 QA Interview Guide - Complete Reference</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); line-height: 1.6; padding: 1rem; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        header { background: linear-gradient(135deg, #1e3a5f 0%, #2e75b6 100%); color: white; padding: 2rem; text-align: center; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .subtitle { opacity: 0.9; }
+        nav { background: #f8fafc; padding: 1rem; border-bottom: 3px solid #2e75b6; position: sticky; top: 0; z-index: 100; }
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; }
+        .nav-item { background: white; padding: 0.5rem; border-radius: 8px; cursor: pointer; border: 2px solid transparent; font-weight: 600; text-align: center; font-size: 0.85rem; transition: all 0.3s; }
+        .nav-item:hover { border-color: #2e75b6; transform: translateY(-2px); }
+        .nav-item.active { background: #2e75b6; color: white; }
+        main { padding: 2rem; }
+        .section { margin-bottom: 3rem; }
+        .section-hidden { display: none; }
+        h2 { color: #1e3a5f; font-size: 2rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid #2e75b6; }
+        h3 { color: #2e75b6; font-size: 1.5rem; margin: 1.5rem 0 1rem; }
+        .qa-card { background: #f8fafc; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border-left: 4px solid #2e75b6; }
+        .question-box { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 2px solid #2e75b6; }
+        .question { font-weight: 700; color: #1e3a5f; font-size: 1.1rem; }
+        .answer { background: white; padding: 1rem; border-radius: 8px; margin-top: 0.5rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; }
+        thead { background: linear-gradient(135deg, #1e3a5f 0%, #2e75b6 100%); color: white; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        tr:hover { background: #f8fafc; }
+        ul, ol { margin-left: 1.5rem; margin-top: 0.5rem; }
+        li { margin: 0.25rem 0; }
+        strong { color: #1e3a5f; }
+        code { background: #f8fafc; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; color: #c00000; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+        .comparison-card { background: white; padding: 1rem; border-radius: 8px; border-top: 3px solid #2e75b6; }
+        .highlight { background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%); border-left: 4px solid #ff6600; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+        hr { margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0; }
+        footer { background: #1e3a5f; color: white; padding: 1.5rem; text-align: center; }
+        .scroll-top { position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px; background: #2e75b6; color: white; border: none; border-radius: 50%; cursor: pointer; display: none; font-size: 1.5rem; z-index: 1000; }
+        .scroll-top.visible { display: block; }
+        @media (max-width: 768px) { .comparison { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .nav-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 QA Interview Guide</h1>
+            <p class="subtitle">Comprehensive Q&A for Software Quality Assurance Interviews</p>
+        </header>
+
+        <nav>
+            <div class="nav-grid">
+                <div class="nav-item active" onclick="showSection('all')">📚 All Topics</div>
+                <div class="nav-item" onclick="showSection('s1')">1. QA Role</div>
+                <div class="nav-item" onclick="showSection('s2')">2. Basics</div>
+                <div class="nav-item" onclick="showSection('s3')">3. Methods</div>
+                <div class="nav-item" onclick="showSection('s4')">4. Documentation</div>
+                <div class="nav-item" onclick="showSection('s5')">5. Defects</div>
+                <div class="nav-item" onclick="showSection('s6')">6. Platforms</div>
+                <div class="nav-item" onclick="showSection('s7')">7. Requirements</div>
+                <div class="nav-item" onclick="showSection('s8')">8. API</div>
+                <div class="nav-item" onclick="showSection('s9')">9. SQL</div>
+                <div class="nav-item" onclick="showSection('s10')">10. Tools</div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- SECTION 1 -->
+            <section class="section" data-section="s1">
+                <h2>1. General Questions about QA and Role</h2>
+                
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the role of QA in software development?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>The role of QA (Quality Assurance)</strong> is not only about finding defects but also about preventing them and ensuring that the final product meets all requirements and user expectations. QA contributes at all stages of the Software Development Life Cycle (SDLC): from requirements analysis to release and maintenance.</p>
+                        <p><strong>In a Sprint:</strong> My role involves analyzing requirements, estimating test coverage, designing, creating, and executing test cases/checklists, performing regression testing, testing new features, reporting defects, and close collaboration with developers and the Product Manager.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">As a QA, how do you see your role and tasks in the sprint (Agile/Scrum)?</div>
+                    </div>
+                    <div class="answer">
+                        <p>See answer above - the role includes requirements analysis, test coverage estimation, test case design, test execution, regression, and team collaboration.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section class="section" data-section="s2">
+                <h2>2. Testing: Basics and Classification</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the classification of testing types?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Classification can be:</strong></p>
+                        <ul>
+                            <li><strong>By purpose:</strong> Functional, Non-functional</li>
+                            <li><strong>By level:</strong> Unit, Integration, System, Acceptance</li>
+                            <li><strong>By positive/negative scenarios</strong></li>
+                            <li><strong>By execution:</strong> Static/Dynamic</li>
+                            <li><strong>By structure:</strong> Black/White/Gray box</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What levels of testing are there?</div>
+                    </div>
+                    <div class="answer">
+                        <table>
+                            <thead><tr><th>Level</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Unit</strong></td><td>Tests individual components/functions</td></tr>
+                                <tr><td><strong>Integration</strong></td><td>Tests the interaction between modules</td></tr>
+                                <tr><td><strong>System</strong></td><td>Tests the system as a whole</td></tr>
+                                <tr><td><strong>Acceptance</strong></td><td>Confirms readiness for the end-user/client</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the difference between validation and verification?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>✓ Verification</h4>
+                                <p><strong>"Did we build the product right?"</strong></p>
+                                <p>Conformance to specification</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>✓ Validation</h4>
+                                <p><strong>"Did we build the right product?"</strong></p>
+                                <p>Conformance to requirements and expectations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is regression testing, and when do we use it?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Regression Testing:</strong> Retesting previously working functions after code changes (bug fixes, new features). Used to ensure changes haven't broken existing functionality.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Do we use regression testing for each feature?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>No.</strong> Regression is typically run after a feature is complete and merged to check that it hasn't impacted other parts of the system. For the feature itself, we use functional testing.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What types of testing should we use before release?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li>Regression Testing (full or partial)</li>
+                            <li>Smoke Testing</li>
+                            <li>Sanity Testing</li>
+                            <li>User Acceptance Testing (UAT)</li>
+                            <li>Non-functional testing (Performance, Security)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3 -->
+            <section class="section" data-section="s3">
+                <h2>3. Testing: Methods and Design Techniques</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What are some common testing techniques you use?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li>Equivalence Partitioning</li>
+                            <li>Boundary Value Analysis</li>
+                            <li>Decision Tables</li>
+                            <li>State Transition Testing</li>
+                            <li>Exploratory Testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Can you explain the difference between black-box and white-box testing?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>⬛ Black Box</h4>
+                                <ul>
+                                    <li>Testing functionality without knowledge of internal code structure</li>
+                                    <li>Focus on requirements and user behavior</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>⬜ White Box</h4>
+                                <ul>
+                                    <li>Testing with access to source code</li>
+                                    <li>Focus on code coverage (statements, branches, conditions)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">White box testing techniques</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li><strong>Statement Coverage</strong></li>
+                            <li><strong>Branch/Decision Coverage</strong></li>
+                            <li><strong>Condition Coverage</strong></li>
+                            <li><strong>Path Coverage</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Examples of grey box testing (e.g., API or DB)</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Gray Box:</strong> Testing with partial knowledge of the internal structure.</p>
+                        <p><strong>Example:</strong> API testing (knowing request/response structure and perhaps DB structure) or testing that requires database interaction.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What do we achieve using boundary values and equivalence partitioning?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Equivalence Partitioning:</strong> Reduces the number of test cases by selecting one representative value from each class (valid and invalid).</p>
+                        <p><strong>Boundary Values:</strong> Finds errors at the edges of a range (maximum, minimum values).</p>
+                        <p><strong>Goal:</strong> Reduce test redundancy and increase defect-finding efficiency.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Decision Tables - when is it better to use them and what for?</div>
+                    </div>
+                    <div class="answer">
+                        <p>Used when system behavior depends on a combination of several conditions (rules). Useful for complex business logic.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Pairwise testing - where could it be useful?</div>
+                    </div>
+                    <div class="answer">
+                        <p>Used for combinatorial testing where all possible pairs of input parameters need to be checked. Useful for testing complex forms, OS/browser configurations, where full coverage is impractical, but the chance of an error from two parameters interacting is high.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How to understand that the number of test cases is enough?</div>
+                    </div>
+                    <div class="answer">
+                        <p>Determined by the level of <strong>Test Coverage:</strong></p>
+                        <ul>
+                            <li>Requirements coverage</li>
+                            <li>Code coverage (for white box)</li>
+                            <li>Passing of all test cases without finding critical/blocking defects</li>
+                        </ul>
+                        <p><strong>Principle:</strong> We can never prove the absence of defects, but we can ensure we have covered all risks.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is an example of a non-functional bug?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Non-functional Bug:</strong> A defect related not to what the system does, but to how it does it.</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul>
+                            <li>Page load takes more than 10 seconds (Performance issue)</li>
+                            <li>Password is shown in plain text in the logs (Security issue)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is localization testing? How to perform it when changing languages?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Localization Testing:</strong> Verifying that the product is adapted for a specific language, region, and culture.</p>
+                        <p><strong>When changing languages, test:</strong></p>
+                        <ul>
+                            <li>Translation (correctness, context)</li>
+                            <li>Date/time/currency formats</li>
+                            <li>Correct text display (e.g., RTL for Arabic)</li>
+                            <li>No "cut-off" strings (i18n)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is accessibility testing?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Accessibility Testing:</strong> Verifying that the product can be used by people with disabilities (vision, hearing, motor skills).</p>
+                        <p><strong>Checks include:</strong></p>
+                        <ul>
+                            <li>Keyboard navigation</li>
+                            <li>Screen reader support</li>
+                            <li>Color contrast (WCAG)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4 -->
+            <section class="section" data-section="s4">
+                <h2>4. Documentation and Test Management</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Test documentation - what is STP, STD, STR?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>According to IEEE 829:</strong></p>
+                        <ul>
+                            <li><strong>STP (Software Test Plan):</strong> Document describing the scope, approach, resources, and schedule of planned testing activities</li>
+                            <li><strong>STD (Software Test Design):</strong> Description of how to perform a specific test</li>
+                            <li><strong>STR (Software Test Report):</strong> Document containing the summary of testing activities and an evaluation of the quality of the tested item</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is a Test Plan? Who is responsible? Who should have access?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Test Plan:</strong> A high-level document outlining objectives, scope, approach, schedule, entry/exit criteria, environment, and responsible parties for testing.</p>
+                        <p><strong>Responsibility:</strong> QA Lead/Test Manager or an experienced QA Engineer</p>
+                        <p><strong>Access:</strong> The entire development team (Developers, Product Managers, QA, Management) to understand the process and assess risks</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is Test Strategy? Difference between Test Plan and Test Strategy?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Test Strategy:</strong> A higher-level document (often part of a general project/company document) that defines the general methods and approaches to testing used within the organization or for a group of projects.</p>
+                        <p><strong>Difference:</strong></p>
+                        <ul>
+                            <li><strong>Strategy:</strong> What and How we will test (the general vision)</li>
+                            <li><strong>Plan:</strong> When, Who, Where, and How Much (a specific plan of action for a project)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the difference between test case and checklist?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>Test Case</h4>
+                                <p>Formal document with clear steps, expected result, and pass/fail criteria. Used when high detail and stability are required (e.g., regression, critical functionality).</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>Checklist</h4>
+                                <p>A list of items or points to check without detailed steps. Quick and flexible. Used for exploratory testing or when requirements are unclear/changing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Checklist - when is it better to use them and when is it possible to manage only with them?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>When to use:</strong></p>
+                        <ul>
+                            <li>For exploratory testing</li>
+                            <li>When requirements are unclear/constantly changing</li>
+                            <li>For testing simple, non-critical functionality/UI</li>
+                        </ul>
+                        <p>A project can survive with only a checklist (especially in fast-paced Agile), but it increases risks as results are less reproducible and coverage is not clearly documented.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Describe how a good test case should look like</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>A good test case should be:</strong></p>
+                        <ul>
+                            <li><strong>Independent</strong> - executable alone</li>
+                            <li><strong>Accurate</strong> - clear steps and expected result</li>
+                            <li><strong>Economical</strong> - not redundant</li>
+                            <li><strong>Reproducible</strong> - gives the same result every time</li>
+                            <li>Have a <strong>Unique ID/Title</strong></li>
+                            <li>Be <strong>linked to a requirement</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Have you used any test management tools? If so, which ones?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Tools:</strong> Jira, Confluence, TestRail, Zephyr, Qase, Xray</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Who needs a test plan?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li><strong>QA Lead/Manager:</strong> to organize work</li>
+                            <li><strong>Developers:</strong> to understand the testing scope</li>
+                            <li><strong>Product Managers/Clients:</strong> to understand risks and evaluate quality/timelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5 -->
+            <section class="section" data-section="s5">
+                <h2>5. Defect Management and Prioritization</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How do you prioritize testing tasks when faced with limited time?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Risk-Based Testing is applied.</strong></p>
+                        <p><strong>First, test:</strong></p>
+                        <ul>
+                            <li>Critical functionality (main revenue/user path)</li>
+                            <li>Areas with high risk (heavily modified code, complex integration)</li>
+                            <li>Smoke tests and key regression tests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Severity/Priority - difference, examples</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card" style="border-top-color: #c00000;">
+                                <h4>🔴 Severity</h4>
+                                <ul>
+                                    <li><strong>Reflects the impact of the defect on the system/functionality</strong></li>
+                                    <li>Determined by the tester</li>
+                                </ul>
+                                <p style="margin-top: 1rem; padding: 1rem; background: #f4cccc; border-radius: 8px;">
+                                    <strong>Example:</strong> Blocker - the system is unusable
+                                </p>
+                            </div>
+                            <div class="comparison-card" style="border-top-color: #ff6600;">
+                                <h4>🟠 Priority</h4>
+                                <ul>
+                                    <li><strong>Reflects the urgency of fixing the defect</strong></li>
+                                    <li>Determined by the Product Manager/QA Lead</li>
+                                </ul>
+                                <p style="margin-top: 1rem; padding: 1rem; background: #fce4d6; border-radius: 8px;">
+                                    <strong>Example:</strong> High - must be fixed in the current sprint
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">On what should a tester pay more attention - on severity or on priority?</div>
+                    </div>
+                    <div class="answer">
+                        <p>The tester should focus on <strong>Severity</strong>, as it is their expert assessment of the bug's impact.</p>
+                        <p>However, <strong>Priority</strong> determines when the bug will be fixed, so in the workflow, Priority is more important (as agreed upon with the team).</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How do you handle communication with developers when reporting bugs?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Professionalism:</strong> Provide a clear, reproducible bug report (Steps, Expected/Actual Result, Environment, Logs/Screenshots/Video).</p>
+                        <p><strong>Collaboration:</strong> Discuss the bug, don't argue. Ask if any additional information is needed. Avoid accusatory language.</p>
+                        <p><strong>Reproduction:</strong> Offer to reproduce the bug together if the developer cannot see it.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Can you describe a challenging bug you've encountered and how you resolved it?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="highlight">
+                            <strong>⚠️ This should be your personal example!</strong>
+                            <p><strong>Structure:</strong> Problem → Cause → How Found/Resolved</p>
+                            <p><strong>Example:</strong> The bug appeared only in a specific combination of OS/Browser/Screen Resolution. Resolution: Using DevTools and proxy tools (Charles/Fiddler), I found that a specific API request header was incorrectly sent in that environment due to a peculiar browser setting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What actions can be done if a developer does not agree that there is a bug?</div>
+                    </div>
+                    <div class="answer">
+                        <ol>
+                            <li><strong>Re-verify:</strong> Repeat the steps together on the developer's machine or a shared test environment</li>
+                            <li><strong>Check Requirements:</strong> Refer to the original Requirements/Specification (User Story, Acceptance Criteria) to confirm that the current behavior does not match the expected behavior</li>
+                            <li><strong>Escalate to PM/Lead:</strong> If agreement is not reached, involve the Product Manager or QA Lead/Tech Lead to make the final decision on whether it is a bug or a change in requirements</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6 -->
+            <section class="section" data-section="s6">
+                <h2>6. Web, Cross-browser, and Mobile Testing</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How do you approach testing for different platforms (e.g., web, mobile)?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>🌐 Web</h4>
+                                <ul>
+                                    <li>Focus on cross-browser compatibility</li>
+                                    <li>Responsive design</li>
+                                    <li>Page load performance</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>📱 Mobile</h4>
+                                <ul>
+                                    <li>Focus on screen orientation</li>
+                                    <li>Interruptions (calls/notifications)</li>
+                                    <li>Gesture usage</li>
+                                    <li>Battery/data consumption</li>
+                                    <li>OS specifics (iOS/Android)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Cache/cookies - difference, usage</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>Cache</h4>
+                                <p>Stores static files (images, CSS, JS) to speed up site loading on repeat visits.</p>
+                                <p><strong>Goal:</strong> Speed</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>Cookies</h4>
+                                <p>Small text files that store user data (sessions, preferences, login). Sent with every server request.</p>
+                                <p><strong>Goal:</strong> Session state/Personalization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Cross-browser testing - how to perform?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>What it is:</strong> Verification that the web application works consistently (or acceptably) across all supported browsers/OS.</p>
+                        <p><strong>Functional vs. UI:</strong></p>
+                        <ul>
+                            <li><strong>Functional testing</strong> (e.g., login works) can often be done in one browser, as the server-side logic or the browser's JS engine usually handles it similarly</li>
+                            <li><strong>UI/Visual testing</strong> must be performed in several because rendering engines (Blink, Gecko, WebKit) display CSS and HTML differently</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the best way to perform 100 test cases for 4 browsers?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Automation.</strong> The best way is to create automated tests that can be run in parallel on different browsers (Selenium Grid, Cypress, Playwright) or use cloud platforms (BrowserStack, Sauce Labs).</p>
+                        <p>Manually execute only the most critical, non-automatable, or visual tests.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Is it better to use real devices or emulators?</div>
+                    </div>
+                    <div class="answer">
+                        <div class="comparison">
+                            <div class="comparison-card">
+                                <h4>Emulators/Simulators</h4>
+                                <ul>
+                                    <li><strong>+</strong> Fast, convenient for development/early testing</li>
+                                    <li><strong>−</strong> Don't mimic real-world conditions (battery, network, interruptions)</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>Real Devices</h4>
+                                <ul>
+                                    <li><strong>Essential for final testing</strong></li>
+                                    <li>Accurately simulate hardware limitations</li>
+                                    <li>Interruptions, network operation, and performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p><strong>Conclusion:</strong> Use emulators for most functional tests, and real devices for non-functional and critical acceptance tests.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What specific can we name about mobile testing?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Mobile Testing Specifics:</strong></p>
+                        <ul>
+                            <li><strong>Interruptions:</strong> Incoming calls, notifications, low battery</li>
+                            <li><strong>Performance:</strong> Battery and RAM consumption</li>
+                            <li><strong>Network:</strong> Switching between Wi-Fi/LTE, loss of connection</li>
+                            <li><strong>Gestures:</strong> Swipes, pinch-to-zoom, long presses</li>
+                            <li><strong>Orientation:</strong> Switching between portrait/landscape modes</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7 -->
+            <section class="section" data-section="s7">
+                <h2>7. Requirements Analysis</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How do we perform requirements analysis ("grey zones" and so on)?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Performing Requirements Analysis:</strong></p>
+                        <ul>
+                            <li>Studying all provided documentation (User Stories, Specifications, Mockups)</li>
+                            <li>The main task of QA is to identify "grey zones" (uncertainties, omissions) by asking "What if..." questions</li>
+                            <li>Breaking down requirements into atomic (smallest) parts (Acceptance Criteria, BDD Scenarios) to create test cases</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What could be the typical problems while requirements analysis?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Typical Problems:</strong></p>
+                        <ul>
+                            <li><strong>Incompleteness:</strong> A requirement does not describe what should happen in a negative scenario (e.g., entering invalid data)</li>
+                            <li><strong>Contradictory:</strong> Two requirements conflict with each other</li>
+                            <li><strong>Ambiguity:</strong> A requirement can be interpreted in different ways (e.g., "The system should be fast")</li>
+                            <li><strong>Untestability:</strong> The requirement does not contain criteria by which its fulfillment can be evaluated</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How do you perform requirements analysis (breaking down to the smallest features)?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Breaking Down to Features:</strong> Using techniques such as Mind Mapping or User Story Mapping to visualize and decompose requirements.</p>
+                        <p>Each requirement must be converted into a set of Acceptance Criteria, which serve as the basis for writing test cases.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8 -->
+            <section class="section" data-section="s8">
+                <h2>8. API Testing</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is API - methods, codes?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>API (Application Programming Interface):</strong> A set of protocols, routines, and tools for building software, allowing two different software components to communicate.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Postman - variables, dependencies</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Postman (Variables):</strong> Used to store data that may change or repeat (e.g., base URL, authorization token).</p>
+                        <p>Storing the URL in Environment Variables or Global Variables avoids re-entering it.</p>
+                        <p><strong>Dependencies:</strong> (e.g., fetching an authorization token) are handled via Pre-request Scripts (JS code).</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What HTTP(S) methods are and what are they?</div>
+                    </div>
+                    <div class="answer">
+                        <table>
+                            <thead><tr><th>Method</th><th>CRUD</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>GET</code></td><td>Read</td><td>Retrieve data. Idempotent and safe</td></tr>
+                                <tr><td><code>POST</code></td><td>Create</td><td>Create new entity. Not idempotent</td></tr>
+                                <tr><td><code>PUT</code></td><td>Update</td><td>Complete update. Idempotent</td></tr>
+                                <tr><td><code>DELETE</code></td><td>Delete</td><td>Delete entity. Idempotent</td></tr>
+                                <tr><td><code>PATCH</code></td><td>Update</td><td>Partial update</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Example of structure of the GET request/response</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Start Line:</strong> <code>GET /users/123 HTTP/1.1</code></p>
+                        <p><strong>Headers:</strong> <code>Host: api.example.com, Accept: application/json</code></p>
+                        <p><strong>Query Parameters:</strong> <code>/users?status=active</code> (part of the URL)</p>
+                        <p><strong>Body:</strong> Should not contain a body (according to best practices)</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the difference between PUT and POST methods?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>POST:</strong> Creates a new resource and is not idempotent.</p>
+                        <p><strong>PUT:</strong> Replaces/updates a resource entirely and is idempotent (executing multiple times yields the same result).</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Types of response codes and meaning</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li><strong>1xx (Informational):</strong> Information (e.g., 100 Continue)</li>
+                            <li><strong>2xx (Success):</strong> Success (e.g., 200 OK, 201 Created, 204 No Content)</li>
+                            <li><strong>3xx (Redirection):</strong> Redirection (e.g., 301 Moved Permanently, 302 Found)</li>
+                            <li><strong>4xx (Client Error):</strong> Client Error (e.g., 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found)</li>
+                            <li><strong>5xx (Server Error):</strong> Server Error (e.g., 500 Internal Server Error, 503 Service Unavailable)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Can GET request contain body request?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>No.</strong> A GET request should not contain a body (according to best practices).</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">When should we use API testing?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li>Before UI testing</li>
+                            <li>For testing business logic (independently of UI)</li>
+                            <li>For testing integration between services</li>
+                            <li>For security verification (authorization, data validation)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What are the most common types of bugs we can meet in API testing?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li>Incorrect response code (e.g., 200 instead of 404)</li>
+                            <li>Incorrect input data validation (e.g., accepts an empty mandatory parameter)</li>
+                            <li>Security issues (missing authorization/authentication)</li>
+                            <li>Performance issues (slow response)</li>
+                            <li>Incorrect response format (JSON/XML)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the structure of the POST request (header, body request, parameters)?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Start Line:</strong> <code>POST /users HTTP/1.1</code></p>
+                        <p><strong>Headers:</strong> <code>Content-Type: application/json</code></p>
+                        <p><strong>Body:</strong> Contains data to create the resource (JSON/XML)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9 -->
+            <section class="section" data-section="s9">
+                <h2>9. Databases (SQL)</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">SQL - what is it, what is used for?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>SQL (Structured Query Language):</strong> A standardized language for managing data in relational database management systems (RDBMS). Used for creating, reading, updating, and deleting (CRUD) data.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What types of SQL commands do you know?</div>
+                    </div>
+                    <div class="answer">
+                        <table>
+                            <thead><tr><th>Type</th><th>Description</th><th>Commands</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>DDL</strong></td><td>Data Definition Language - DB structure</td><td>CREATE, ALTER, DROP</td></tr>
+                                <tr><td><strong>DML</strong></td><td>Data Manipulation Language - data</td><td>SELECT, INSERT, UPDATE, DELETE</td></tr>
+                                <tr><td><strong>DCL</strong></td><td>Data Control Language - access control</td><td>GRANT, REVOKE</td></tr>
+                                <tr><td><strong>TCL</strong></td><td>Transaction Control Language - transactions</td><td>COMMIT, ROLLBACK</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Commands, functions and operators in SQL</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Commands (Statements):</strong> SELECT, INSERT, UPDATE, DELETE, CREATE TABLE</p>
+                        <p><strong>Functions:</strong> Perform calculations on data (COUNT(), SUM(), AVG(), MAX(), MIN(), UPPER(), CONCAT())</p>
+                        <p><strong>Operators:</strong> Used in conditions (=, >, <, AND, OR, LIKE, IN)</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Difference between database and datatable</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Database:</strong> A container that holds all objects (tables, views, indexes, etc.)</p>
+                        <p><strong>Datatable (Table):</strong> An object within the DB that stores data in a structured format (rows and columns)</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Examples of functions in SELECT request</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Aggregate functions:</strong> <code>COUNT(*), SUM(column_name), AVG(column_name)</code></p>
+                        <p><strong>Scalar functions:</strong> <code>UPPER(), CONCAT()</code></p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What types of JOIN there are? What is the difference between LEFT JOIN and RIGHT JOIN?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li><strong>INNER JOIN:</strong> Returns rows that have matching values in both tables</li>
+                            <li><strong>LEFT (OUTER) JOIN:</strong> Returns all rows from the left table and matching rows from the right. If there is no match, the right side will be filled with NULL</li>
+                            <li><strong>RIGHT (OUTER) JOIN:</strong> Returns all rows from the right table and matching rows from the left. If there is no match, the left side will be filled with NULL</li>
+                            <li><strong>FULL (OUTER) JOIN:</strong> Returns rows when there is a match in one of the tables</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">When working with database could be useful for QA tester?</div>
+                    </div>
+                    <div class="answer">
+                        <ul>
+                            <li><strong>Data Verification:</strong> Checking that data sent via UI/API is correctly saved in the DB</li>
+                            <li><strong>Test Data Setup:</strong> Creating or modifying data for testing specific scenarios</li>
+                            <li><strong>Business Logic Testing:</strong> Verifying complex logic implemented at the DB level (stored procedures, triggers)</li>
+                            <li><strong>Diagnosis:</strong> Assisting in determining the cause of a bug (e.g., finding a discrepancy between the UI and DB)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 10 -->
+            <section class="section" data-section="s10">
+                <h2>10. Tools and Methodologies (Agile, DevTools, Git, JS)</h2>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is Agile/Scrum?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Agile:</strong> A software development philosophy based on incremental delivery, collaboration, and rapid response to change.</p>
+                        <p><strong>Scrum:</strong> A framework for implementing Agile, using iterations (sprints).</p>
+                        <p><strong>Roles:</strong> Scrum Master, Product Owner, Development Team</p>
+                        <p><strong>Events:</strong> Sprint Planning, Daily Scrum (Stand-up), Sprint Review, Sprint Retrospective</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">Automated test - area of usage, when should we apply automated testing?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>When to apply:</strong></p>
+                        <ul>
+                            <li>Tests executed repeatedly</li>
+                            <li>Stable functionality</li>
+                            <li>Regression testing</li>
+                            <li>Cross-browser testing</li>
+                            <li>Load testing</li>
+                        </ul>
+                        <p><strong>When NOT to apply:</strong></p>
+                        <ul>
+                            <li>Very small project</li>
+                            <li>Short lifecycle</li>
+                            <li>UI changes too frequently (high maintenance cost)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What types of selectors can we use in UI automated testing?</div>
+                    </div>
+                    <div class="answer">
+                        <p>ID, Name, Class Name, Tag Name, XPath, CSS Selectors (most reliable)</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is git and github? How can we send changes of the code to the main repo from the local repo?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Git:</strong> A distributed version control system for tracking code changes.</p>
+                        <p><strong>GitHub:</strong> A cloud-based service for hosting Git repositories.</p>
+                        <p><strong>Send to main repo:</strong> After <code>git add .</code> and <code>git commit -m "Message"</code>, use <code>git push origin &lt;branch-name&gt;</code>. Then create a Pull Request (PR) to merge into main or master.</p>
+                        <p><strong>Merge changes:</strong> <code>git merge &lt;branch-name&gt;</code> (merges the specified branch into the current one) or use a PR on GitHub.</p>
+                        <p><strong>Resolve conflicts:</strong> Manually edit the conflicting files, choose the desired changes, then <code>git add &lt;conflicted-file&gt;</code> and <code>git commit</code>.</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is Charles is used for?</div>
+                    </div>
+                    <div class="answer">
+                        <p>A Proxy Server for recording and analyzing all traffic between a web browser (or mobile application) and the Internet. Used to view/modify requests/responses (e.g., for testing 500/404 errors).</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">How can we override responses in DevTools and for what?</div>
+                    </div>
+                    <div class="answer">
+                        <p>Allows intercepting and modifying HTTP responses/files without changing server code.</p>
+                        <p><strong>Used for:</strong></p>
+                        <ul>
+                            <li>Simulating a slow/failed API response (e.g., 500/404 code)</li>
+                            <li>Testing UI edge cases with a large amount of data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What is the most useful feature of DevTools for a QA tester?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Console:</strong> for viewing JS/API logs and errors</p>
+                        <p><strong>Network:</strong> for analyzing all HTTP requests and responses, including load time, headers, and body</p>
+                    </div>
+                </div>
+
+                <div class="qa-card">
+                    <div class="question-box">
+                        <div class="question">What are the main data types in JavaScript? How to create function? What loops are in JS?</div>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Data Types:</strong></p>
+                        <ul>
+                            <li>Primitive: string, number, boolean, null, undefined, symbol, bigint</li>
+                            <li>Non-Primitive: object (including Array, Function)</li>
+                        </ul>
+                        <p><strong>Create Function:</strong> <code>function functionName(params) { ... }</code> or as an arrow function <code>const functionName = (params) => { ... }</code></p>
+                        <p><strong>Loops:</strong> for, while, do...while, for...in (for object properties), for...of (for iterable objects like arrays)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 <strong>Tip:</strong> Practice these answers regularly and adapt them to your personal experience. Be ready to provide specific examples from your practice!</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">© 2024 QA Interview Guide</p>
+        </footer>
+    </div>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        function showSection(id) {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (id === 'all') {
+                sections.forEach(s => s.classList.remove('section-hidden'));
+            } else {
+                sections.forEach(s => {
+                    if (s.dataset.section === id) {
+                        s.classList.remove('section-hidden');
+                    } else {
+                        s.classList.add('section-hidden');
+                    }
+                });
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
