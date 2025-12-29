@@ -1,1 +1,1 @@
-# QA-Interview-Guide
+# QA-Interview-Guide-RU
